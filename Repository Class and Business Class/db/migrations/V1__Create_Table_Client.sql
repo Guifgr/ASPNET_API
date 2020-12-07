@@ -1,0 +1,8 @@
+CREATE TABLE `client` (
+	`id` INT(5) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(50) NOT NULL,
+	`cnh` VARCHAR(50) NOT NULL,
+	`age` INT(10) NOT NULL,
+	`gender` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`id`)
+)
