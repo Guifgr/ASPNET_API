@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace APIRest_ASPNET5.Hypermedia.Filters
 {
-    public class HipermediaFilterOptions
+    public class HiperMediaFilterOptions
     {
         public List<IResponseEnricher> ContentResponseEnricherList { get; set; } = new List<IResponseEnricher>();
     }
