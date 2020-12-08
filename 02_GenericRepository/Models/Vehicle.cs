@@ -10,10 +10,10 @@ namespace APIRest_ASPNET5.Models
         public string Model { get; set; }
 
         [Column("theyear")]
-        public string Year { get; set; }
+        public long Year { get; set; }
 
         [Column("plate")]
-        public long Plate { get; set; }
+        public string Plate { get; set; }
 
         [Column("color")]
         public string Color { get; set; }
