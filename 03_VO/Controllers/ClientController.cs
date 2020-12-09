@@ -3,6 +3,7 @@ using APIRest_ASPNET5.Business;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using APIRest_ASPNET5.Data.VO;
+using APIRest_ASPNET5.Hypermedia.Filters;
 
 namespace APIRest_ASPNET5.Controllers
 {
@@ -20,12 +21,14 @@ namespace APIRest_ASPNET5.Controllers
         }
 
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_clientBusiness.FindAll());
         }
 
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
             var client = _clientBusiness.FindById(id);
@@ -34,6 +37,7 @@ namespace APIRest_ASPNET5.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] ClientVO client)
         {
             if (client == null) return BadRequest();
@@ -41,6 +45,7 @@ namespace APIRest_ASPNET5.Controllers
         }
         
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] ClientVO client)
         {
             if (client == null) return BadRequest();

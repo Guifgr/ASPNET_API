@@ -1,5 +1,7 @@
 using APIRest_ASPNET5.Business;
 using APIRest_ASPNET5.Business.Implementations;
+using APIRest_ASPNET5.Hypermedia.Enricher;
+using APIRest_ASPNET5.Hypermedia.Filters;
 using APIRest_ASPNET5.Models.Context;
 using APIRest_ASPNET5.Repository;
 using APIRest_ASPNET5.Repository.Generic;
@@ -47,8 +49,12 @@ namespace APIRest_ASPNET5
             //Dependency Injection
             services.AddScoped<IClientBusiness, ClientBusinessImplementation>();
             services.AddScoped<IVehicleBusiness, VehicleBusinessImplementation>();
-
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+
+            var filterOptions = new HyperMediaFilterOptions();
+            filterOptions.ContentResponseEnricherList.Add(new ClientEnricher());
+
+            services.AddSingleton(filterOptions);
         }
 
 
@@ -69,6 +75,7 @@ namespace APIRest_ASPNET5
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapControllerRoute("DefaultApi","{controller=values}/{id?}");
             });
         }
         private void MigrateDatabase(string connection)
