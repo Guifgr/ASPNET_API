@@ -7,10 +7,12 @@ using APIRest_ASPNET5.Repository;
 using APIRest_ASPNET5.Repository.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -49,12 +51,29 @@ namespace APIRest_ASPNET5
             //Versioning API
             services.AddApiVersioning();
 
+            //Swagger Support
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo
+                    {
+                        Title = "APIRest_ASPNET5",
+                        Version = "v1",
+                        Description = "Just implementing API exemples",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "Yan Andrey",
+                            Url = new Uri("https://github.com/yanandrey")
+                        }
+                    });
+            });
+
             //Dependency Injection
             services.AddScoped<IClientBusiness, ClientBusinessImplementation>();
             services.AddScoped<IVehicleBusiness, VehicleBusinessImplementation>();
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
-            //HATEOAS support
+            //HATEOAS Support
             var filterOptions = new HyperMediaFilterOptions();
             filterOptions.ContentResponseEnricherList.Add(new ClientEnricher());
             services.AddSingleton(filterOptions);
@@ -72,6 +91,17 @@ namespace APIRest_ASPNET5
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Just implementing API exemples - v1");
+            });
+
+            var option = new RewriteOptions();
+            option.AddRedirect("^$","swagger");
+            app.UseRewriter(option);
 
             app.UseAuthorization();
 
