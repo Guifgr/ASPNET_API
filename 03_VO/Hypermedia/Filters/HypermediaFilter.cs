@@ -1,15 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace APIRest_ASPNET5.Hypermedia.Filters
 {
     public class HyperMediaFilter : ResultFilterAttribute
     {
-        private readonly HyperMediaFilterOptions _hypermediaFilterOptions;
+        private readonly HyperMediaFilterOptions _hyperMediaFilterOptions;
 
-        public HyperMediaFilter(HyperMediaFilterOptions _hypermediaFilterOptions)
+        public HyperMediaFilter(HyperMediaFilterOptions hyperMediaFilterOptions)
         {
-            _hypermediaFilterOptions = _hypermediaFilterOptions;
+            _hyperMediaFilterOptions = hyperMediaFilterOptions;
         }
 
         public override void OnResultExecuting(ResultExecutingContext context)
@@ -20,7 +22,13 @@ namespace APIRest_ASPNET5.Hypermedia.Filters
 
         private void TryEnrichResult(ResultExecutingContext context)
         {
-            throw new NotImplementedException();
+            if (context.Result is OkObjectResult okObjectResult)
+            {
+                var Enricher = _hyperMediaFilterOptions
+                    .ContentResponseEnricherList
+                    .FirstOrDefault(x => x.CanEnrich(context));
+                if (Enricher != null) Task.FromResult(Enricher.Enrich(context));
+            };
         }
     }
 }
