@@ -2,8 +2,8 @@
 
 namespace APIRest_ASPNET5.Hypermedia.Abstract
 {
-    public interface ISupportHypermedia
+    public interface ISupportHyperMedia
     {
-        List<HypermediaLink> Links { get; set; }
+        List<HyperMediaLink> Links { get; set; }
     }
 }

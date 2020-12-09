@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
+using System.Threading.Tasks;
 
 namespace APIRest_ASPNET5.Hypermedia.Abstract
 {
     public interface IResponseEnricher
     {
-        bool CanEnrich(ResultExecutingContent context);
-        Task Enrich(ResultExecutingContent context);
+        bool CanEnrich(ResultExecutingContext context);
+        Task Enrich(ResultExecutingContext context);
     }
 }

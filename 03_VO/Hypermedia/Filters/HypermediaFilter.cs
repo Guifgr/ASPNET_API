@@ -24,10 +24,10 @@ namespace APIRest_ASPNET5.Hypermedia.Filters
         {
             if (context.Result is OkObjectResult okObjectResult)
             {
-                var Enricher = _hyperMediaFilterOptions
+                var enricher = _hyperMediaFilterOptions
                     .ContentResponseEnricherList
                     .FirstOrDefault(x => x.CanEnrich(context));
-                if (Enricher != null) Task.FromResult(Enricher.Enrich(context));
+                if (enricher != null) Task.FromResult(enricher.Enrich(context));
             };
         }
     }
