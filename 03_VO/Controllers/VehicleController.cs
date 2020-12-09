@@ -5,8 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace APIRest_ASPNET5.Controllers
 {
+    [ApiVersion("1")]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v{version:ApiVersion}/[controller]")]
     public class VehicleController : ControllerBase
     {
         private readonly ILogger<VehicleController> _logger;

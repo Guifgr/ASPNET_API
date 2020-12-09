@@ -46,14 +46,17 @@ namespace APIRest_ASPNET5
 
             services.AddDbContext<MySQLContext>(options => options.UseMySql(connection));
 
+            //Versioning API
+            services.AddApiVersioning();
+
             //Dependency Injection
             services.AddScoped<IClientBusiness, ClientBusinessImplementation>();
             services.AddScoped<IVehicleBusiness, VehicleBusinessImplementation>();
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
+            //HATEOAS support
             var filterOptions = new HyperMediaFilterOptions();
             filterOptions.ContentResponseEnricherList.Add(new ClientEnricher());
-
             services.AddSingleton(filterOptions);
         }
 

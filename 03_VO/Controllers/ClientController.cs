@@ -7,8 +7,9 @@ using APIRest_ASPNET5.Hypermedia.Filters;
 
 namespace APIRest_ASPNET5.Controllers
 {
+    [ApiVersion("1")]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v{version:ApiVersion}/[controller]")]
     public class ClientController : ControllerBase
     {
         private readonly ILogger<ClientController> _logger;
