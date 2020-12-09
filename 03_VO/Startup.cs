@@ -76,6 +76,7 @@ namespace APIRest_ASPNET5
             //HATEOAS Support
             var filterOptions = new HyperMediaFilterOptions();
             filterOptions.ContentResponseEnricherList.Add(new ClientEnricher());
+            filterOptions.ContentResponseEnricherList.Add(new VehicleEnricher());
             services.AddSingleton(filterOptions);
         }
 
