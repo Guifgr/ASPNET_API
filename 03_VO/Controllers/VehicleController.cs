@@ -1,7 +1,8 @@
-﻿using APIRest_ASPNET5.Models;
-using APIRest_ASPNET5.Business;
+﻿using APIRest_ASPNET5.Business;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using APIRest_ASPNET5.Data.VO;
+using APIRest_ASPNET5.Hypermedia.Filters;
 
 namespace APIRest_ASPNET5.Controllers
 {
@@ -20,12 +21,14 @@ namespace APIRest_ASPNET5.Controllers
         }
 
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_vehicleBusiness.FindAll());
         }
 
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
             var vehicle = _vehicleBusiness.FindById(id);
@@ -34,6 +37,7 @@ namespace APIRest_ASPNET5.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] VehicleVO vehicle)
         {
             if (vehicle == null) return BadRequest();
@@ -41,6 +45,7 @@ namespace APIRest_ASPNET5.Controllers
         }
 
         [HttpPut]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] VehicleVO vehicle)
         {
             if (vehicle == null) return BadRequest();

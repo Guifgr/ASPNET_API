@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace APIRest_ASPNET5.Hypermedia.Enricher
 {
-    public class ClientEnricher : ContentResponseEnricher<ClientVO>
+    public class VehicleEnricher : ContentResponseEnricher<VehicleVO>
     {
         private readonly object _lock = new object();
-        protected override Task EnrichModel(ClientVO content, IUrlHelper urlHelper)
+        protected override Task EnrichModel(VehicleVO content, IUrlHelper urlHelper)
         {
-            var path = "api/client";
+            var path = "api/vehicle";
             string link = GetLink(content.Id, urlHelper, path);
 
             content.Links.Add(new HyperMediaLink()

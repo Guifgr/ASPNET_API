@@ -1,6 +1,10 @@
-﻿namespace APIRest_ASPNET5.Models
+﻿using APIRest_ASPNET5.Hypermedia;
+using APIRest_ASPNET5.Hypermedia.Abstract;
+using System.Collections.Generic;
+
+namespace APIRest_ASPNET5.Data.VO
 {
-    public class VehicleVO
+    public class VehicleVO : ISupportHyperMedia
     {
         public long Id { get; set; }
 
@@ -11,5 +15,6 @@
         public string Plate { get; set; }
 
         public string Color { get; set; }
+        public List<HyperMediaLink> Links { get; set; } = new List<HyperMediaLink>();
     }
 }

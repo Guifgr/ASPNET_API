@@ -1,5 +1,4 @@
-﻿using APIRest_ASPNET5.Models;
-using APIRest_ASPNET5.Business;
+﻿using APIRest_ASPNET5.Business;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using APIRest_ASPNET5.Data.VO;

@@ -1,4 +1,4 @@
-﻿using APIRest_ASPNET5.Models;
+﻿using APIRest_ASPNET5.Data.VO;
 using System.Collections.Generic;
 
 namespace APIRest_ASPNET5.Business
