@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
-
 namespace APIRest_ASPNET5.Services
 {
     public interface ITokenService

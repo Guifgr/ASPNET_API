@@ -6,5 +6,7 @@ namespace APIRest_ASPNET5.Repository
     public interface IEmployeeRepository
     {
         Employee ValidateCredentials(EmployeeVO employee);
+
+        Employee RefreshEmployeeInfo(Employee employee);
     }
 }
