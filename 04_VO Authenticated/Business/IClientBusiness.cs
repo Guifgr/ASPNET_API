@@ -13,6 +13,8 @@ namespace APIRest_ASPNET5.Business
 
         ClientVO Update(ClientVO client);
 
+        ClientVO Disable(long id);
+
         void Delete(long id);
     }
 }

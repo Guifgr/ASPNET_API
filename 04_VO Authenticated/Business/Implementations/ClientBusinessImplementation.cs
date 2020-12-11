@@ -10,10 +10,10 @@ namespace APIRest_ASPNET5.Business.Implementations
 {
     public class ClientBusinessImplementation : IClientBusiness
     {
-        private readonly IRepository<Client> _repository;
+        private readonly IClientRepository _repository;
         private readonly ClientConverter _converter;
 
-        public ClientBusinessImplementation(IRepository<Client> repository)
+        public ClientBusinessImplementation(IClientRepository repository)
         {
             _repository = repository;
             _converter = new ClientConverter();
@@ -43,9 +43,16 @@ namespace APIRest_ASPNET5.Business.Implementations
             return _converter.Parse(clientEntity);
         }
 
+        public ClientVO Disable(long id)
+        {
+            var clientEntity = _repository.Disable(id);
+            return _converter.Parse(clientEntity);
+        }
+
         public void Delete(long id)
         {
             _repository.Delete(id);
         }
+
     }
 }

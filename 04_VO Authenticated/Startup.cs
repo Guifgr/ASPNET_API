@@ -118,10 +118,9 @@ namespace APIRest_ASPNET5
             services.AddScoped<IClientBusiness, ClientBusinessImplementation>();
             services.AddScoped<IVehicleBusiness, VehicleBusinessImplementation>();
             services.AddScoped<ILoginBusiness, LoginBusinessImplementation>();
-
             services.AddTransient<ITokenService, TokenService>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-
+            services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
             //HATEOAS Support
