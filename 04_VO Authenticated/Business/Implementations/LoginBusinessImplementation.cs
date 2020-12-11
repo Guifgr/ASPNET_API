@@ -85,5 +85,10 @@ namespace APIRest_ASPNET5.Business.Implementations
                 refreshToken
             );
         }
+
+        public bool RevokeToken(string Username)
+        {
+            return _repository.RevokeToken(Username);
+        }
     }
 }

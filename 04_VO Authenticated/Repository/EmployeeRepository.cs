@@ -28,6 +28,15 @@ namespace APIRest_ASPNET5.Repository
             return _context.Employees.SingleOrDefault(e => (e.Username == Username));
         }
 
+        public bool RevokeToken(string Username)
+        {
+            var employee = _context.Employees.SingleOrDefault(e => (e.Username == Username));
+            if (employee == null) return false;
+            employee.RefreshToken = null;
+            _context.SaveChanges();
+            return true;
+        }
+
         public Employee RefreshEmployeeInfo(Employee employee)
         {
             if (!_context.Employees.Any(e => e.Id.Equals(employee.Id))) return null;

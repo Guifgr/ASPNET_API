@@ -7,5 +7,7 @@ namespace APIRest_ASPNET5.Business
         TokenVO ValidateCredentials(EmployeeVO employee);
 
         TokenVO ValidateCredentials(TokenVO token);
+
+        bool RevokeToken(string Username);
     }
 }

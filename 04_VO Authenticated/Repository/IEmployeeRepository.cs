@@ -9,6 +9,8 @@ namespace APIRest_ASPNET5.Repository
 
         Employee ValidateCredentials(string username);
 
+        bool RevokeToken(string username);
+
         Employee RefreshEmployeeInfo(Employee employee);
     }
 }
