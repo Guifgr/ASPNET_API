@@ -1,10 +1,15 @@
 using APIRest_ASPNET5.Business;
 using APIRest_ASPNET5.Business.Implementations;
+using APIRest_ASPNET5.Configurations;
 using APIRest_ASPNET5.Hypermedia.Enricher;
 using APIRest_ASPNET5.Hypermedia.Filters;
 using APIRest_ASPNET5.Models.Context;
 using APIRest_ASPNET5.Repository;
 using APIRest_ASPNET5.Repository.Generic;
+using APIRest_ASPNET5.Services;
+using APIRest_ASPNET5.Services.Implementations;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
@@ -12,10 +17,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace APIRest_ASPNET5
 {
@@ -38,6 +46,43 @@ namespace APIRest_ASPNET5
         public void ConfigureServices(IServiceCollection services)
         {
 
+            //Authentication Support
+            var tokenConfigurations = new TokenConfiguration();
+            new ConfigureFromConfigurationOptions<TokenConfiguration>(
+                Configuration.GetSection("TokenConfigurations")
+                )
+                .Configure(tokenConfigurations);
+
+            services.AddSingleton(tokenConfigurations);
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(Options =>
+            {
+                Options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = tokenConfigurations.Issuer,
+                    ValidAudience = tokenConfigurations.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenConfigurations.Secret))
+                };
+            });
+
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser().Build()
+                    );
+            });
+
+            //Controllers
             services.AddControllers();
             var connection = Configuration["MySQLConection:MySQLConectionString"];
 
@@ -46,6 +91,7 @@ namespace APIRest_ASPNET5
                 MigrateDatabase(connection);
             }
 
+            //Context
             services.AddDbContext<MySQLContext>(options => options.UseMySql(connection));
 
             //Versioning API
@@ -71,6 +117,11 @@ namespace APIRest_ASPNET5
             //Dependency Injection
             services.AddScoped<IClientBusiness, ClientBusinessImplementation>();
             services.AddScoped<IVehicleBusiness, VehicleBusinessImplementation>();
+            services.AddScoped<ILoginBusiness, LoginBusinessImplementation>();
+
+            services.AddTransient<ITokenService, TokenService>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
             //HATEOAS Support

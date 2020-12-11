@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using APIRest_ASPNET5.Data.VO;
 using APIRest_ASPNET5.Hypermedia.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace APIRest_ASPNET5.Controllers
 {
     [ApiVersion("1")]
     [ApiController]
+    [Authorize("Bearer")]
     [Route("api/v{version:ApiVersion}/[controller]")]
     public class ClientController : ControllerBase
     {

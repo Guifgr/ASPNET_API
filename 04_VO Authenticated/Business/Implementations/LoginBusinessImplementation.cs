@@ -40,10 +40,10 @@ namespace APIRest_ASPNET5.Business.Implementations
             employee.RefreshToken = refreshToken;
             employee.RefreshTokenExpiryTime = DateTime.Now.AddDays(_configuration.DaysToExpire);
 
+            _repository.RefreshEmployeeInfo(employee);
+
             DateTime createDate = DateTime.Now;
             DateTime expirationDate = createDate.AddMinutes(_configuration.Minutes);
-
-            //_repository.RefreshEmployeeInfo(employee);
 
             return new TokenVO(
                 true,

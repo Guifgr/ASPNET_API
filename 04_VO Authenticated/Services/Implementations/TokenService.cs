@@ -64,7 +64,7 @@ namespace APIRest_ASPNET5.Services.Implementations
             if (jwtSecurityToken == null ||
                 !jwtSecurityToken.Header.Alg.Equals(
                     SecurityAlgorithms.HmacSha256,
-                    StringComparison.InvariantCulture)) throw new SecurityTokenException("invalid token");
+                    StringComparison.InvariantCulture)) throw new SecurityTokenException("Invalid Token");
 
             return principal;
         }

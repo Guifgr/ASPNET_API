@@ -19,7 +19,7 @@ namespace APIRest_ASPNET5.Models
         public string Name { get; set; }
 
         [Column("refresh_token")]
-        public long RefreshToken { get; set; }
+        public string RefreshToken { get; set; }
         
         [Column("refresh_token_expiry_time")]
         public DateTime RefreshTokenExpiryTime { get; set; }
