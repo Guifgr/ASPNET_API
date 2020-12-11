@@ -23,6 +23,11 @@ namespace APIRest_ASPNET5.Repository
             return _context.Employees.FirstOrDefault(e=> (e.Username == employee.Username) && (e.Password == pass));
         }
 
+        public Employee ValidateCredentials(string Username)
+        {
+            return _context.Employees.SingleOrDefault(e => (e.Username == Username));
+        }
+
         public Employee RefreshEmployeeInfo(Employee employee)
         {
             if (!_context.Employees.Any(e => e.Id.Equals(employee.Id))) return null;
@@ -50,6 +55,6 @@ namespace APIRest_ASPNET5.Repository
             Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
             Byte[] hashedBytes = algorithm.ComputeHash(inputBytes);
             return BitConverter.ToString(hashedBytes);
-        }
+        }        
     }
 }

@@ -53,5 +53,37 @@ namespace APIRest_ASPNET5.Business.Implementations
                 refreshToken
             );
         }
+
+        public TokenVO ValidateCredentials(TokenVO token)
+        {
+            var accessToken = token.AccessToken;
+            var refreshToken = token.RefreshToken;
+
+            var principal = _tokenService.GetPrincipalFromExpiredTokens(accessToken);
+            var username = principal.Identity.Name;
+            var employee = _repository.ValidateCredentials(username);
+
+            if (employee == null || 
+                employee.RefreshToken != refreshToken || 
+                employee.RefreshTokenExpiryTime <= DateTime.Now) return null;
+
+            accessToken = _tokenService.GenerateAccessToken(principal.Claims);
+            refreshToken = _tokenService.GenerateRefreshToken();
+
+            employee.RefreshToken = refreshToken;
+
+            _repository.RefreshEmployeeInfo(employee);
+
+            DateTime createDate = DateTime.Now;
+            DateTime expirationDate = createDate.AddMinutes(_configuration.Minutes);
+
+            return new TokenVO(
+                true,
+                createDate.ToString(DATE_FORMAT),
+                expirationDate.ToString(DATE_FORMAT),
+                accessToken,
+                refreshToken
+            );
+        }
     }
 }

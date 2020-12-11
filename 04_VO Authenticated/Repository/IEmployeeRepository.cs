@@ -7,6 +7,8 @@ namespace APIRest_ASPNET5.Repository
     {
         Employee ValidateCredentials(EmployeeVO employee);
 
+        Employee ValidateCredentials(string username);
+
         Employee RefreshEmployeeInfo(Employee employee);
     }
 }
