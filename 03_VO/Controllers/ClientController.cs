@@ -36,6 +36,15 @@ namespace APIRest_ASPNET5.Controllers
             return Ok(client);
         }
 
+        [HttpGet("findClientByName")]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Get([FromQuery] string firstName)
+        {
+            var client = _clientBusiness.FindByName(firstName);
+            if (client == null) return NotFound();
+            return Ok(client);
+        }
+
         [HttpPost]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] ClientVO client)

@@ -2,6 +2,7 @@
 using APIRest_ASPNET5.Models.Context;
 using APIRest_ASPNET5.Repository.Generic;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace APIRest_ASPNET5.Repository
@@ -28,6 +29,15 @@ namespace APIRest_ASPNET5.Repository
                 }
             }
             return user;
+        }
+
+        public List<Client> FindByName(string firstName)
+        {
+            if (!string.IsNullOrWhiteSpace(firstName))
+            {
+                return _context.Clients.Where(c => c.Name.Contains(firstName)).ToList();
+            }
+            return null;
         }
     }
 }

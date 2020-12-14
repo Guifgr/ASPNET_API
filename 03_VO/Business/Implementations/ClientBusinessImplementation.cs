@@ -29,6 +29,11 @@ namespace APIRest_ASPNET5.Business.Implementations
             return _converter.Parse(_repository.FindById(id));
         }
 
+        public List<ClientVO> FindByName(string firstName)
+        {
+            return _converter.Parse(_repository.FindByName(firstName));
+        }
+
         public ClientVO Create(ClientVO client)
         {
             var clientEntity = _converter.Parse(client);
@@ -51,7 +56,6 @@ namespace APIRest_ASPNET5.Business.Implementations
         public void Delete(long id)
         {
             _repository.Delete(id);
-        }
-
+        }        
     }
 }

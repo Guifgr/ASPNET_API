@@ -9,6 +9,8 @@ namespace APIRest_ASPNET5.Business
 
         ClientVO FindById(long id);
 
+        List<ClientVO> FindByName(string firstName);
+
         List<ClientVO> FindAll();
 
         ClientVO Update(ClientVO client);
