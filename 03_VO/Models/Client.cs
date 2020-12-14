@@ -12,8 +12,8 @@ namespace APIRest_ASPNET5.Models
         [Column("cnh")]
         public string CNH { get; set; }
 
-        [Column("age")]
-        public long Age { get; set; }
+        [Column("email")]
+        public string Email { get; set; }
 
         [Column("gender")]
         public string Gender { get; set; }

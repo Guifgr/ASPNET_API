@@ -16,5 +16,9 @@ namespace APIRest_ASPNET5.Repository
         void Delete(long id);
 
         bool Exists(long id);
+
+        List<T> FindAllWithPagedSearch(string query);
+
+        int GetCount(string query);
     }
 }

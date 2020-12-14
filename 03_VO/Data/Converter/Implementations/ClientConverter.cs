@@ -16,7 +16,7 @@ namespace APIRest_ASPNET5.Data.Converter.Implementations
                 Id = origin.Id,
                 Name = origin.Name,
                 CNH = origin.CNH,
-                Age = origin.Age,
+                Email = origin.Email,
                 Gender = origin.Gender
 
             };
@@ -30,7 +30,7 @@ namespace APIRest_ASPNET5.Data.Converter.Implementations
                 Id = origin.Id,
                 Name = origin.Name,
                 CNH = origin.CNH,
-                Age = origin.Age,
+                Email = origin.Email,
                 Gender = origin.Gender
             };
         }

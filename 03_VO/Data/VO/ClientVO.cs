@@ -12,7 +12,7 @@ namespace APIRest_ASPNET5.Data.VO
 
         public string CNH { get; set; }
 
-        public long Age { get; set; }
+        public string Email { get; set; }
 
         public string Gender { get; set; }
 

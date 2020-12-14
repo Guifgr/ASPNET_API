@@ -20,11 +20,11 @@ namespace APIRest_ASPNET5.Controllers
             _clientBusiness = clientBusiness;
         }
 
-        [HttpGet]
+        [HttpGet("{sortDiretion}/{pageSize}/{page}")]
         [TypeFilter(typeof(HyperMediaFilter))]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] string name, string sortDiretion, int pageSize, int page)
         {
-            return Ok(_clientBusiness.FindAll());
+            return Ok(_clientBusiness.FindWithPagedSearch(name, sortDiretion, pageSize, page));
         }
 
         [HttpGet("{id}")]
