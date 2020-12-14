@@ -13,6 +13,8 @@ namespace APIRest_ASPNET5.Business
 
         VehicleVO Update(VehicleVO vehicle);
 
+        VehicleVO Disable(long id);
+
         void Delete(long id);
     }
 }

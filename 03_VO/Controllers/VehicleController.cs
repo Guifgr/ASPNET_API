@@ -52,6 +52,14 @@ namespace APIRest_ASPNET5.Controllers
             return Ok(_vehicleBusiness.Update(vehicle));
         }
 
+        [HttpPatch("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Patch(long id)
+        {
+            var vehicle = _vehicleBusiness.Disable(id);
+            return Ok(vehicle);
+        }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {

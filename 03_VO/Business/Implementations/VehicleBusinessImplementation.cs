@@ -10,10 +10,10 @@ namespace APIRest_ASPNET5.Business.Implementations
 {
     public class VehicleBusinessImplementation : IVehicleBusiness
     {
-        private readonly IRepository<Vehicle> _repository;
+        private readonly IVehicleRepository _repository;
         private readonly VehicleConverter _converter;
 
-        public VehicleBusinessImplementation(IRepository<Vehicle> repository)
+        public VehicleBusinessImplementation(IVehicleRepository repository)
         {
             _repository = repository;
             _converter = new VehicleConverter();
@@ -42,10 +42,16 @@ namespace APIRest_ASPNET5.Business.Implementations
             vehicleEntity = _repository.Update(vehicleEntity);
             return _converter.Parse(vehicleEntity);
         }
+        public VehicleVO Disable(long id)
+        {
+            var vehicleEntity = _repository.Disable(id);
+            return _converter.Parse(vehicleEntity);
+        }
 
         public void Delete(long id)
         {
             _repository.Delete(id);
         }
+
     }
 }

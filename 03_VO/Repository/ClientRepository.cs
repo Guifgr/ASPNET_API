@@ -31,11 +31,11 @@ namespace APIRest_ASPNET5.Repository
             return user;
         }
 
-        public List<Client> FindByName(string firstName)
+        public List<Client> FindByName(string name)
         {
-            if (!string.IsNullOrWhiteSpace(firstName))
+            if (!string.IsNullOrWhiteSpace(name))
             {
-                return _context.Clients.Where(c => c.Name.Contains(firstName)).ToList();
+                return _context.Clients.Where(c => c.Name.Contains(name)).ToList();
             }
             return null;
         }

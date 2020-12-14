@@ -7,6 +7,6 @@ namespace APIRest_ASPNET5.Repository
     {
         Client Disable(long id);
 
-        List<Client> FindByName(string firstName);
+        List<Client> FindByName(string name);
     }
 }

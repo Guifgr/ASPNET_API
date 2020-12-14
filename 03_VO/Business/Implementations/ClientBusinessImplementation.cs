@@ -29,9 +29,9 @@ namespace APIRest_ASPNET5.Business.Implementations
             return _converter.Parse(_repository.FindById(id));
         }
 
-        public List<ClientVO> FindByName(string firstName)
+        public List<ClientVO> FindByName(string name)
         {
-            return _converter.Parse(_repository.FindByName(firstName));
+            return _converter.Parse(_repository.FindByName(name));
         }
 
         public ClientVO Create(ClientVO client)

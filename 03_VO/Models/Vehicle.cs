@@ -17,5 +17,8 @@ namespace APIRest_ASPNET5.Models
 
         [Column("color")]
         public string Color { get; set; }
+
+        [Column("enabled")]
+        public bool Enabled { get; set; }
     }
 }

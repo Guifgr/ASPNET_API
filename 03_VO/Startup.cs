@@ -73,6 +73,7 @@ namespace APIRest_ASPNET5
             services.AddScoped<IVehicleBusiness, VehicleBusinessImplementation>();
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
 
             //HATEOAS Support
             var filterOptions = new HyperMediaFilterOptions();

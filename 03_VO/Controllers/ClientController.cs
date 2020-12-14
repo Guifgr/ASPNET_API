@@ -38,9 +38,9 @@ namespace APIRest_ASPNET5.Controllers
 
         [HttpGet("findClientByName")]
         [TypeFilter(typeof(HyperMediaFilter))]
-        public IActionResult Get([FromQuery] string firstName)
+        public IActionResult Get([FromQuery] string name)
         {
-            var client = _clientBusiness.FindByName(firstName);
+            var client = _clientBusiness.FindByName(name);
             if (client == null) return NotFound();
             return Ok(client);
         }
