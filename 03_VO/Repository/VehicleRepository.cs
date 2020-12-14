@@ -2,6 +2,7 @@
 using APIRest_ASPNET5.Models.Context;
 using APIRest_ASPNET5.Repository.Generic;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace APIRest_ASPNET5.Repository
@@ -28,6 +29,14 @@ namespace APIRest_ASPNET5.Repository
                 }
             }
             return car;
+        }
+        public List<Vehicle> FindByModel(string model)
+        {
+            if (!string.IsNullOrWhiteSpace(model))
+            {
+                return _context.Vehicles.Where(v => v.Model.Contains(model)).ToList();
+            }
+            return null;
         }
     }
 }

@@ -28,6 +28,10 @@ namespace APIRest_ASPNET5.Business.Implementations
         {
             return _converter.Parse(_repository.FindById(id));
         }
+        public List<VehicleVO> FindByModel(string model)
+        {
+            return _converter.Parse(_repository.FindByModel(model));
+        }
 
         public VehicleVO Create(VehicleVO vehicle)
         {
@@ -52,6 +56,5 @@ namespace APIRest_ASPNET5.Business.Implementations
         {
             _repository.Delete(id);
         }
-
     }
 }

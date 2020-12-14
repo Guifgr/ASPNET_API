@@ -9,6 +9,8 @@ namespace APIRest_ASPNET5.Business
 
         VehicleVO FindById(long id);
 
+        List<VehicleVO> FindByModel(string model);
+
         List<VehicleVO> FindAll();
 
         VehicleVO Update(VehicleVO vehicle);

@@ -36,6 +36,15 @@ namespace APIRest_ASPNET5.Controllers
             return Ok(vehicle);
         }
 
+        [HttpGet("findVehicleByModel")]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Get([FromQuery] string model)
+        {
+            var vehicle = _vehicleBusiness.FindByModel(model);
+            if (vehicle == null) return NotFound();
+            return Ok(vehicle);
+        }
+
         [HttpPost]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] VehicleVO vehicle)
