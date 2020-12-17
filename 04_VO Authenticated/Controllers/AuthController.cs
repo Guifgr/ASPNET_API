@@ -1,6 +1,5 @@
 ﻿using APIRest_ASPNET5.Business;
 using APIRest_ASPNET5.Data.VO;
-using APIRest_ASPNET5.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

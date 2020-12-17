@@ -20,7 +20,7 @@ namespace APIRest_ASPNET5.Repository
         public Employee ValidateCredentials(EmployeeVO employee)
         {
             var pass = ComputeHash(employee.Password, new SHA256CryptoServiceProvider());
-            return _context.Employees.FirstOrDefault(e=> (e.Username == employee.Username) && (e.Password == pass));
+            return _context.Employees.FirstOrDefault(e => (e.Username == employee.Username) && (e.Password == pass));
         }
 
         public Employee ValidateCredentials(string Username)

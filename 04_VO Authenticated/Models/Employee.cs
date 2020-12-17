@@ -9,13 +9,13 @@ namespace APIRest_ASPNET5.Models
         [Column("id")]
         public long Id { get; set; }
 
-        [Column("user_name")]
+        [Column("username")]
         public string Username { get; set; }
 
         [Column("password")]
         public string Password { get; set; }
 
-        [Column("name")]
+        [Column("fullname")]
         public string Name { get; set; }
 
         [Column("refresh_token")]
