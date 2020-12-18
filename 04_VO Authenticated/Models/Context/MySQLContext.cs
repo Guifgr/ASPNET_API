@@ -14,6 +14,7 @@ namespace APIRest_ASPNET5.Models.Context
         public DbSet<Client> Clients { get; set; }
 
         public DbSet<Vehicle> Vehicles { get; set; }
+
         public DbSet<Employee> Employees { get; set; }
     }
 }
